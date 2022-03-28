@@ -1,4 +1,6 @@
-body{background-color: #f1ffc4;}
+body {
+  background-color: #f1ffc4;
+}
 #App {
   text-align: center;
   width: 90%;
@@ -12,26 +14,14 @@ div#cart {
 }
 
 div#products {
-  width: 73%;
+  width: 100%;
   float: left;
 }
 
-div#cart {
+th {
   width: 25%;
-  float: right;
 }
 
-th{width: 25%;}
-
-@media (max-width: 773px) {
-  div#products {
-    width: 100%;
-    float: none;
-  }
-  div#cart {
-    width: 100%;
-    float: none;
-  }
+#total {
+  font-weight: 500;
 }
-
-

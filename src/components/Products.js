@@ -1,25 +1,25 @@
 import React, { Component } from "react";
-import productSample from "../providers/productSample";
 
 class Products extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      productSample: productSample,
-    };
-  }
-
   inputChangeHandler = (e, i) => {
-    var temporalState = this.state.productSample;
-    // console.log("Modificamos producto: " + i);
-    // console.log("State: " + this.state.productSample[i].nameProduct);
-    // console.log("Cantidad: " + e.target.value);
-    // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    var temporalState = this.props.products;
     temporalState[i].quantityProduct = e.target.value;
-    temporalState[i].Subtotal =
-      temporalState[i].quantityProduct * temporalState[i].priceProduct;
+    temporalState[i].Subtotal = (
+      temporalState[i].quantityProduct * temporalState[i].priceProduct
+    ).toFixed(2);
     this.setState({ productSample: temporalState });
+    this.updateTotal();
   };
+
+  updateTotal() {
+    var sumatorio = 0;
+    this.props.products.map((product, i) => {
+      sumatorio += parseFloat(product.Subtotal);
+      return true;
+    });
+    document.getElementById("total").innerHTML =
+      "Total: " + sumatorio.toFixed(2);
+  }
 
   render() {
     return (
@@ -35,19 +35,22 @@ class Products extends Component {
             </tr>
           </thead>
           <tbody>
-            {productSample.map((product, i) => {
+            {this.props.products.map((product, i) => {
               return (
                 <tr key={i}>
-                  <td className="productImage">{product.nameProduct}</td>
+                  <td className="productImage">
+                    <img
+                      src={product.imageProduct}
+                      style={{ width: "100px" }}
+                      alt={product.nameProduct}
+                    />
+                  </td>
                   <td className="productName">{product.nameProduct}</td>
                   <td className="productPrice">{product.priceProduct} €</td>
                   <td className="productQuantity">
                     <input
                       type="number"
                       defaultValue={product.quantityProduct}
-                      // onChange={() => {
-                      //   this.inputChangeHandler(this, i);
-                      // }}
                       onChange={(e) => {
                         this.inputChangeHandler(e, i);
                       }}
@@ -59,6 +62,7 @@ class Products extends Component {
             })}
           </tbody>
         </table>
+        <div id="total"> Total: 0 </div>
       </div>
     );
   }
