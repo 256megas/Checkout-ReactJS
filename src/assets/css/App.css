@@ -1,0 +1,36 @@
+#App {
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+div#products,
+div#cart {
+  border: 1px solid black;
+}
+
+div#products {
+  width: 73%;
+  float: left;
+}
+
+div#cart {
+  width: 25%;
+  float: right;
+}
+
+th{width: 25%;}
+
+@media (max-width: 773px) {
+  div#products {
+    width: 100%;
+    float: none;
+  }
+  div#cart {
+    width: 100%;
+    float: none;
+  }
+}
+
+
