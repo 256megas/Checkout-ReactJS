@@ -9,8 +9,16 @@ class Products extends Component {
     };
   }
 
-  inputChangeHandler = (i) => {
-    console.log("Modificamos producto" + i);
+  inputChangeHandler = (e, i) => {
+    var temporalState = this.state.productSample;
+    // console.log("Modificamos producto: " + i);
+    // console.log("State: " + this.state.productSample[i].nameProduct);
+    // console.log("Cantidad: " + e.target.value);
+    // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    temporalState[i].quantityProduct = e.target.value;
+    temporalState[i].Subtotal =
+      temporalState[i].quantityProduct * temporalState[i].priceProduct;
+    this.setState({ productSample: temporalState });
   };
 
   render() {
@@ -36,13 +44,16 @@ class Products extends Component {
                   <td className="productQuantity">
                     <input
                       type="number"
-                      value={product.quantityProduct}
-                      onChange={() => {
-                        this.inputChangeHandler(i);
+                      defaultValue={product.quantityProduct}
+                      // onChange={() => {
+                      //   this.inputChangeHandler(this, i);
+                      // }}
+                      onChange={(e) => {
+                        this.inputChangeHandler(e, i);
                       }}
                     ></input>
                   </td>
-                  <td className="productSubtotal">Subtotal</td>
+                  <td className="productSubtotal">{product.Subtotal}</td>
                 </tr>
               );
             })}
