@@ -46,7 +46,7 @@ class Products extends Component {
                     />
                   </td>
                   <td className="productName">{product.nameProduct}</td>
-                  <td className="productPrice">{product.priceProduct} €</td>
+                  <td className="productPrice">{product.priceProduct}</td>
                   <td className="productQuantity">
                     <input
                       type="number"
